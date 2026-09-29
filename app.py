@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 
 # Page Configuration
 st.set_page_config(page_title="Global AI Tools Directory", page_icon="🚀", layout="wide")
@@ -19,14 +18,14 @@ st.markdown("""
 </style>
 """, unsafe_html=True)
 
-# Dummy Database for AI Tools (Aap isme aur tools add kar sakte hain)
+# Dummy Database for AI Tools
 ai_tools_data = [
     {
         "name": "VantaBlack AI Writer",
         "category": "Copywriting",
         "pricing": "Freemium",
         "desc": "Create ultra-engaging marketing copies and blogs in 100+ languages using neuro-linguistic AI models.",
-        "url": "https://google.com",  # Yahan aapka affiliate link aayega
+        "url": "https://google.com",
         "clicks": 1420
     },
     {
@@ -87,23 +86,22 @@ if filtered_tools:
     cols = st.columns(3)
     for index, tool in enumerate(filtered_tools):
         with cols[index % 3]:
-            pricing_class = f"pricing-{tool['pricing'].lower()}"
+            pricing_class = tool['pricing'].lower()
             st.markdown(f"""
             <div class="card">
                 <span class="card-tag">{tool['category']}</span>
                 <div class="card-title">{tool['name']}</div>
                 <p style="font-size:14px; margin-top:10px; min-height:60px;">{tool['desc']}</p>
-                <p style="font-size:13px;">Pricing: <span class="{pricing_class}">{tool['pricing']}</span> | 👥 Used by: {tool['clicks']}+</p>
+                <p style="font-size:13px;">Pricing: <span class="pricing-{pricing_class}">{tool['pricing']}</span> | 👥 Used by: {tool['clicks']}+</p>
             </div>
             """, unsafe_html=True)
             
             # Action Button
-            if st.button(f"Get Access to {tool['name']}", key=f"btn_{index}"):
-                st.markdown(f'<meta http-equiv="refresh" content="0; url={tool["url"]}">', unsafe_html=True)
+            st.link_button(f"Get Access to {tool['name']}", tool['url'])
 else:
     st.info("Aapki search ke hisab se koi tool nahi mila. Please filters change karein.")
 
-# Sidebar Footer for Future Monetization Notice
+# Sidebar Footer
 st.sidebar.write("---")
 st.sidebar.markdown("💡 **Want to feature your AI Tool?**")
 st.sidebar.caption("Contact: sponsor@yourdomain.com (Earn $200/listing)")
