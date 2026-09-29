@@ -1,9 +1,17 @@
 import streamlit as st
+import os
 
 # 1. Page Configuration (Sabse upar hona zaroori hai)
 st.set_page_config(page_title="Global AI Tools Directory", page_icon="🚀", layout="wide")
 
-# 2. Dummy Database for AI Tools
+# 2. AdSense Verification Code Injector
+# Yeh code background mein aapki index.html file ko Google crawler ke liye active karega
+if os.path.exists("index.html"):
+    with open("index.html", "r") as f:
+        adsense_code = f.read()
+    st.components.v1.html(adsense_code, height=0, width=0)
+
+# 3. Dummy Database for AI Tools
 ai_tools_data = [
     {
         "name": "VantaBlack AI Writer",
@@ -39,18 +47,18 @@ ai_tools_data = [
     }
 ]
 
-# 3. TOP ADSENSE PLACEHOLDER (Bina HTML ke simple Streamlit Ad box)
-with st.header("📢 Google AdSense Top Banner"):
-    st.info("YAHA APNA HORIZONTAL ADSENSE CODE BANNER DALEIN (Abhi yeh Ads ke liye safe jagah hai)")
-
-st.write("---")
-
 # 4. Header Section
 st.title("🚀 Global AI Tools Directory")
 st.subheader("Discover the world's most powerful AI tools to supercharge your workflow.")
 st.write("---")
 
-# 5. Sidebar for Search and Filtering
+# 5. Top Ad Place Placeholder
+with st.header("📢 Google AdSense Top Banner"):
+    st.info("Ads will display here automatically once your AdSense account is approved.")
+
+st.write("---")
+
+# 6. Sidebar for Search and Filtering
 st.sidebar.header("🔍 Filter AI Tools")
 search_query = st.sidebar.text_input("Search Tools by Name or Keywords", "")
 
@@ -60,12 +68,12 @@ selected_category = st.sidebar.selectbox("Select Category", categories)
 pricing_filters = ["All", "Free", "Freemium", "Paid"]
 selected_pricing = st.sidebar.selectbox("Pricing Model", pricing_filters)
 
-# 6. SIDEBAR ADSENSE PLACEHOLDER
+# 7. Sidebar Ad Place Placeholder
 st.sidebar.write("---")
 st.sidebar.header("📢 Sponsored Ad")
-st.sidebar.warning("YAHA APNA SIDEBAR ADSENSE CODE DALEIN")
+st.sidebar.warning("Sidebar ads will appear here automatically.")
 
-# 7. Filtering Logic
+# 8. Filtering Logic
 filtered_tools = ai_tools_data
 
 if search_query:
@@ -77,7 +85,7 @@ if selected_category != "All":
 if selected_pricing != "All":
     filtered_tools = [t for t in filtered_tools if t['pricing'] == selected_pricing]
 
-# 8. Displaying Tools in Grid Layout (3 Columns)
+# 9. Displaying Tools
 if filtered_tools:
     cols = st.columns(3)
     for index, tool in enumerate(filtered_tools):
@@ -88,10 +96,8 @@ if filtered_tools:
                 st.write(tool['desc'])
                 st.write(f"💰 Pricing: **{tool['pricing']}** | 👥 Clicks: {tool['clicks']}+")
                 st.link_button(f"Get Access to {tool['name']}", tool['url'])
-else:
-    st.info("Aapki search ke hisab se koi tool nahi mila. Please filters change karein.")
 
-# 9. Sidebar Footer
+# 10. Sidebar Footer
 st.sidebar.write("---")
 st.sidebar.markdown("💡 **Want to feature your AI Tool?**")
 st.sidebar.caption("Contact: sponsor@yourdomain.com (Earn $200/listing)")
