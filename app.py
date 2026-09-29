@@ -39,12 +39,20 @@ ai_tools_data = [
     }
 ]
 
-# 3. Header Section
+# 3. TOP ADSENSE PLACEHOLDER (Website ke sabse upar ka Ad box)
+# Jab aapko AdSense ka code milega, toh aap 'YAHAN APNA ADSENSE CODE DALEIN' ko mita kar apna asli code paste kar denge.
+st.markdown("""
+<div style="background-color: #f8f9fa; padding: 10px; text-align: center; border: 1px dashed #cccccc; margin-bottom: 20px; color: #666666;">
+    📢 [Google AdSense Horizontal Banner Ad Place - YAHAN APNA CODE DALEIN]
+</div>
+""", unsafe_html=True)
+
+# 4. Header Section
 st.title("🚀 Global AI Tools Directory")
 st.subheader("Discover the world's most powerful AI tools to supercharge your workflow.")
 st.write("---")
 
-# 4. Sidebar for Search and Filtering
+# 5. Sidebar for Search and Filtering
 st.sidebar.header("🔍 Filter AI Tools")
 search_query = st.sidebar.text_input("Search Tools by Name or Keywords", "")
 
@@ -54,7 +62,16 @@ selected_category = st.sidebar.selectbox("Select Category", categories)
 pricing_filters = ["All", "Free", "Freemium", "Paid"]
 selected_pricing = st.sidebar.selectbox("Pricing Model", pricing_filters)
 
-# 5. Filtering Logic
+# 6. SIDEBAR ADSENSE PLACEHOLDER (Sidebar ke niche ka Ad box)
+st.sidebar.write("---")
+st.sidebar.markdown("### 📢 Sponsored Ad")
+st.sidebar.markdown("""
+<div style="background-color: #f8f9fa; padding: 20px; text-align: center; border: 1px dashed #cccccc; height: 250px; color: #666666;">
+    [Google AdSense Vertical Banner Ad Place - YAHAN APNA CODE DALEIN]
+</div>
+""", unsafe_html=True)
+
+# 7. Filtering Logic
 filtered_tools = ai_tools_data
 
 if search_query:
@@ -66,24 +83,21 @@ if selected_category != "All":
 if selected_pricing != "All":
     filtered_tools = [t for t in filtered_tools if t['pricing'] == selected_pricing]
 
-# 6. Displaying Tools in Grid Layout (3 Columns)
+# 8. Displaying Tools in Grid Layout (3 Columns)
 if filtered_tools:
     cols = st.columns(3)
     for index, tool in enumerate(filtered_tools):
         with cols[index % 3]:
-            # Simple card presentation using native Streamlit containers to avoid CSS errors
             with st.container(border=True):
                 st.write(f"🏷️ **{tool['category']}**")
                 st.subheader(tool['name'])
                 st.write(tool['desc'])
                 st.write(f"💰 Pricing: **{tool['pricing']}** | 👥 Clicks: {tool['clicks']}+")
-                
-                # Direct Action Link Button
                 st.link_button(f"Get Access to {tool['name']}", tool['url'])
 else:
     st.info("Aapki search ke hisab se koi tool nahi mila. Please filters change karein.")
 
-# 7. Sidebar Footer
+# 9. Sidebar Footer
 st.sidebar.write("---")
 st.sidebar.markdown("💡 **Want to feature your AI Tool?**")
 st.sidebar.caption("Contact: sponsor@yourdomain.com (Earn $200/listing)")
