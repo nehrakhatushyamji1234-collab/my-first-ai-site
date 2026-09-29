@@ -39,13 +39,11 @@ ai_tools_data = [
     }
 ]
 
-# 3. TOP ADSENSE PLACEHOLDER (Website ke sabse upar ka Ad box)
-# Jab aapko AdSense ka code milega, toh aap 'YAHAN APNA ADSENSE CODE DALEIN' ko mita kar apna asli code paste kar denge.
-st.markdown("""
-<div style="background-color: #f8f9fa; padding: 10px; text-align: center; border: 1px dashed #cccccc; margin-bottom: 20px; color: #666666;">
-    📢 [Google AdSense Horizontal Banner Ad Place - YAHAN APNA CODE DALEIN]
-</div>
-""", unsafe_html=True)
+# 3. TOP ADSENSE PLACEHOLDER (Bina HTML ke simple Streamlit Ad box)
+with st.header("📢 Google AdSense Top Banner"):
+    st.info("YAHA APNA HORIZONTAL ADSENSE CODE BANNER DALEIN (Abhi yeh Ads ke liye safe jagah hai)")
+
+st.write("---")
 
 # 4. Header Section
 st.title("🚀 Global AI Tools Directory")
@@ -62,14 +60,10 @@ selected_category = st.sidebar.selectbox("Select Category", categories)
 pricing_filters = ["All", "Free", "Freemium", "Paid"]
 selected_pricing = st.sidebar.selectbox("Pricing Model", pricing_filters)
 
-# 6. SIDEBAR ADSENSE PLACEHOLDER (Sidebar ke niche ka Ad box)
+# 6. SIDEBAR ADSENSE PLACEHOLDER
 st.sidebar.write("---")
-st.sidebar.markdown("### 📢 Sponsored Ad")
-st.sidebar.markdown("""
-<div style="background-color: #f8f9fa; padding: 20px; text-align: center; border: 1px dashed #cccccc; height: 250px; color: #666666;">
-    [Google AdSense Vertical Banner Ad Place - YAHAN APNA CODE DALEIN]
-</div>
-""", unsafe_html=True)
+st.sidebar.header("📢 Sponsored Ad")
+st.sidebar.warning("YAHA APNA SIDEBAR ADSENSE CODE DALEIN")
 
 # 7. Filtering Logic
 filtered_tools = ai_tools_data
